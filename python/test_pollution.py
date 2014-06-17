@@ -1,6 +1,4 @@
-
-import math
-from approval import approval
+import approval
 import pollution as p
 
 
