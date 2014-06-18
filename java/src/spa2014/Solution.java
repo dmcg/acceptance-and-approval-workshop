@@ -15,4 +15,7 @@ public class Solution {
         return rowTemplate;
     }
 
+    public static Iterable<Point> trendFor(Iterable<Point> points) {
+        return ImmutableList.of();
+    }
 }

@@ -8,10 +8,10 @@ import static org.junit.Assert.assertTrue;
 
 public class EnvironmentTest {
 
-    private static final File dataFile = new File("datasets/air-quality-urban-background-ozone.csv");
+    public static final File DATA_FILE = new File("datasets/air-quality-urban-background-ozone.csv");
 
     @Test
     public void runningFromRightDir() {
-        assertTrue(dataFile.isFile());
+        assertTrue(DATA_FILE.isFile());
     }
 }

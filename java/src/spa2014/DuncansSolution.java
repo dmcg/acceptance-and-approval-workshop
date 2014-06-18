@@ -3,6 +3,7 @@ package spa2014;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
 
@@ -32,6 +33,9 @@ public class DuncansSolution {
         return Joiner.on('\n').join(tableRows);
     }
 
+    public static Iterable<Point> trendFor(Iterable<Point> points) {
+        return ImmutableList.of();
+    }
 
     private static Function<? super Point, ? extends String> tableRowFromPoint(final String rowTemplate) {
         return new Function<Point, String>() {
