@@ -6,8 +6,13 @@ import java.io.File;
 
 public class Solution {
 
-    public static ImmutableList<Point> readPoints(File dataFile) {
+    public static Iterable<Point> readPoints(File dataFile) {
         return ImmutableList.of();
+    }
+
+
+    public static String htmlRows(Iterable<Point> points, String rowTemplate) {
+        return rowTemplate;
     }
 
 }

@@ -1,10 +1,7 @@
 package spa2014;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,7 +10,8 @@ import org.rococoa.okeydoke.junit.ApprovalsRule;
 import java.io.File;
 import java.io.IOException;
 
-import static spa2014.DuncansSolution.*;
+import static spa2014.Solution.htmlRows;
+import static spa2014.Solution.readPoints;
 
 public class SummariseTest {
 
@@ -26,15 +24,15 @@ public class SummariseTest {
 
     @Test
     public void readCSVToHTML() throws IOException {
-        ImmutableList<Point> points = readPoints(dataFile);
-        Iterable<String> tableRows = Iterables.transform(points, tableRowFromPoint(rowTemplate));
-        String rowsHtml = Joiner.on('\n').join(tableRows);
+        Iterable<Point> points = readPoints(dataFile);
+        String htmlRows = htmlRows(points, rowTemplate);
         ImmutableMap<String, String> templateVars = ImmutableMap.of(
                 "${_resourcedir}", "../../../templates",
-                "${samples}", rowsHtml);
+                "${samples}", htmlRows);
         String html = Templating.substitute(Files.toString(templateFile, Charsets.UTF_8), templateVars);
         approver.assertApproved(html);
     }
+
 
 
 }
