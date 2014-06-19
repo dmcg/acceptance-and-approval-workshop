@@ -2,12 +2,10 @@ package spa2014;
 
 import com.google.common.collect.ImmutableList;
 
-import java.io.File;
-
 public class YourSolution implements Solution {
 
     @Override
-    public Iterable<Point> readPoints(File dataFile) {
+    public Iterable<Point> parsePoints(Iterable<String> lines) {
         return ImmutableList.of();
     }
 

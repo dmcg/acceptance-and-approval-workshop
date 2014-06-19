@@ -26,7 +26,7 @@ public class AnalyseTest {
     @Ignore("Until you've implemented")
     @Test
     public void readCSVToHTML() throws IOException {
-        Iterable<Point> points = solution.readPoints(DATA_FILE);
+        Iterable<Point> points = readPoints(DATA_FILE);
         String htmlRows = solution.htmlRows(points, rowTemplate);
         ImmutableMap<String, String> templateVars = ImmutableMap.of(
                 "${_resourcedir}", "../../resources",
@@ -38,7 +38,7 @@ public class AnalyseTest {
     @Ignore("Until you've implemented")
     @Test
     public void trend() throws IOException {
-        ImmutableList<Point> points = ImmutableList.copyOf(solution.readPoints(DATA_FILE));
+        ImmutableList<Point> points = ImmutableList.copyOf(readPoints(DATA_FILE));
         Iterable<Point> trend = solution.trendFor(points);
         ImmutableMap<String, String> templateVars = ImmutableMap.of(
                 "${_resourcedir}", "../../../templates",
@@ -46,6 +46,10 @@ public class AnalyseTest {
                 "${trend_points", solution.htmlRows(trend, rowTemplate));
         String html = Templating.substitute(Files.toString(templateFile, Charsets.UTF_8), templateVars);
         approver.assertApproved(html);
+    }
+
+    private Iterable<Point> readPoints(File file) throws IOException {
+        return solution.parsePoints(Files.readLines(file, Charsets.UTF_8));
     }
 
 

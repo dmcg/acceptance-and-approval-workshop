@@ -1,11 +1,14 @@
 package spa2014;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 import org.junit.Rule;
 import org.junit.Test;
 import org.rococoa.okeydoke.junit.ApprovalsRule;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class ReadCSVTest {
 
@@ -17,7 +20,8 @@ public class ReadCSVTest {
 
     @Test
     public void readCSVToData() throws IOException {
-        Iterable<Point> points = solution.readPoints(DATA_FILE);
+        List<String> lines = Files.readLines(DATA_FILE, Charsets.UTF_8);
+        Iterable<Point> points = solution.parsePoints(lines);
         approver.assertApproved(points);
     }
 

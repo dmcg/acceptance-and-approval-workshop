@@ -1,20 +1,14 @@
 package spa2014;
 
-import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.io.Files;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
+@SuppressWarnings("UnusedDeclaration")
 public class DuncansSolution implements Solution {
 
-    public Iterable<Point> readPoints(File dataFile) throws IOException {
-        List<String> lines = Files.readLines(dataFile, Charsets.UTF_8);
+    public Iterable<Point> parsePoints(Iterable<String> lines) {
         return Iterables.transform(Iterables.skip(lines, 1), lineToPoint());
     }
 

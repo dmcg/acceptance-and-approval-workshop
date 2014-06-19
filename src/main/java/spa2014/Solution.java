@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public interface Solution {
 
-    Iterable<Point> readPoints(File dataFile) throws IOException;
+    Iterable<Point> parsePoints(Iterable<String> lines);
 
     String htmlRows(Iterable<Point> points, String rowTemplate);
 
