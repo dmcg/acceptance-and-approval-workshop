@@ -11,14 +11,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class DuncansSolution {
+public class DuncansSolution implements Solution {
 
-    public static Iterable<Point> readPoints(File dataFile) throws IOException {
+    public Iterable<Point> readPoints(File dataFile) throws IOException {
         List<String> lines = Files.readLines(dataFile, Charsets.UTF_8);
         return Iterables.transform(Iterables.skip(lines, 1), lineToPoint());
     }
 
-    private static Function<? super String, Point> lineToPoint() {
+    private Function<? super String, Point> lineToPoint() {
         return new Function<String, Point>() {
             @Override
             public Point apply(String s) {
@@ -28,12 +28,12 @@ public class DuncansSolution {
         };
     }
 
-    public static String htmlRows(Iterable<Point> points, String rowTemplate) {
+    public String htmlRows(Iterable<Point> points, String rowTemplate) {
         Iterable<String> tableRows = Iterables.transform(points, tableRowFromPoint(rowTemplate));
         return Joiner.on('\n').join(tableRows);
     }
 
-    public static Iterable<Point> trendFor(Iterable<Point> points) {
+    public Iterable<Point> trendFor(Iterable<Point> points) {
         return ImmutableList.of();
     }
 

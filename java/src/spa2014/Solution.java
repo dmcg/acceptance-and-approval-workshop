@@ -1,21 +1,13 @@
 package spa2014;
 
-import com.google.common.collect.ImmutableList;
-
 import java.io.File;
+import java.io.IOException;
 
-public class Solution {
+public interface Solution {
 
-    public static Iterable<Point> readPoints(File dataFile) {
-        return ImmutableList.of();
-    }
+    Iterable<Point> readPoints(File dataFile) throws IOException;
 
+    String htmlRows(Iterable<Point> points, String rowTemplate);
 
-    public static String htmlRows(Iterable<Point> points, String rowTemplate) {
-        return rowTemplate;
-    }
-
-    public static Iterable<Point> trendFor(Iterable<Point> points) {
-        return ImmutableList.of();
-    }
+    Iterable<Point> trendFor(Iterable<Point> points);
 }
