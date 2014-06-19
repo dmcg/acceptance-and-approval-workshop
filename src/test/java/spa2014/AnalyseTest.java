@@ -4,6 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Files;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.rococoa.okeydoke.junit.ApprovalsRule;
@@ -22,6 +23,7 @@ public class AnalyseTest {
 
     private final Solution solution = Solutions.create();
 
+    @Ignore("Until you've implemented")
     @Test
     public void readCSVToHTML() throws IOException {
         Iterable<Point> points = solution.readPoints(DATA_FILE);
@@ -33,6 +35,7 @@ public class AnalyseTest {
         approver.assertApproved(html);
     }
 
+    @Ignore("Until you've implemented")
     @Test
     public void trend() throws IOException {
         ImmutableList<Point> points = ImmutableList.copyOf(solution.readPoints(DATA_FILE));
