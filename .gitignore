@@ -1,9 +1,7 @@
 *.class
 out/
-*/out/*
-exercise/reports/
-workspace.xml
 *~
 *.pyc
 *.pyo
 *-received.*
+*.actual.*
