@@ -30,20 +30,33 @@ public class AnalyseTest {
         String htmlRows = solution.htmlRows(points, rowTemplate);
         ImmutableMap<String, String> templateVars = ImmutableMap.of(
                 "${_resourcedir}", "../../resources",
-                "${samples}", htmlRows);
+                "${history}", htmlRows);
         String html = Templating.substitute(Files.toString(templateFile, Charsets.UTF_8), templateVars);
         approver.assertApproved(html);
     }
 
     @Ignore("Until you've implemented")
     @Test
-    public void trend() throws IOException {
+    public void fit() throws IOException {
         ImmutableList<Point> points = ImmutableList.copyOf(readPoints(DATA_FILE));
-        Iterable<Point> trend = solution.trendFor(points);
+        Iterable<Point> fit = solution.fit(points);
         ImmutableMap<String, String> templateVars = ImmutableMap.of(
-                "${_resourcedir}", "../../../templates",
-                "${samples}", solution.htmlRows(points, rowTemplate),
-                "${trend_points", solution.htmlRows(trend, rowTemplate));
+                "${_resourcedir}", "../../resources",
+                "${history}", solution.htmlRows(points, rowTemplate),
+                "${projection}", solution.htmlRows(fit, rowTemplate));
+        String html = Templating.substitute(Files.toString(templateFile, Charsets.UTF_8), templateVars);
+        approver.assertApproved(html);
+    }
+
+    @Ignore("Until you've implemented")
+    @Test
+    public void extrapolate() throws IOException {
+        ImmutableList<Point> points = ImmutableList.copyOf(readPoints(DATA_FILE));
+        Iterable<Point> fit = solution.extrapolate(points, 2020);
+        ImmutableMap<String, String> templateVars = ImmutableMap.of(
+                "${_resourcedir}", "../../resources",
+                "${history}", solution.htmlRows(points, rowTemplate),
+                "${projection}", solution.htmlRows(fit, rowTemplate));
         String html = Templating.substitute(Files.toString(templateFile, Charsets.UTF_8), templateVars);
         approver.assertApproved(html);
     }
