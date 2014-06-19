@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/okeydoke-0.9.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hamcrest-core-1.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/okeydoke-0.9.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/guava-17.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-4.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/guava-17.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-4.11-sources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -11,7 +11,7 @@ public class ReadCSVTest {
 
     private static final File DATA_FILE = EnvironmentTest.DATA_FILE;
 
-    @Rule public ApprovalsRule approver = ApprovalsRule.fileSystemRule("java/test");
+    @Rule public ApprovalsRule approver = ApprovalsRule.fileSystemRule("src/test/java");
 
     private final Solution solution = Solutions.create();
 

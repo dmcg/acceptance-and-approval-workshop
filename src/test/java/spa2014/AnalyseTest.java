@@ -14,11 +14,11 @@ import java.io.IOException;
 public class AnalyseTest {
 
     private static final File DATA_FILE = EnvironmentTest.DATA_FILE;
-    private static final File templateFile = new File("templates/air-quality.html");
+    private static final File templateFile = new File("src/test/resources/air-quality.html");
 
     private static final String rowTemplate = "<tr><td>%s</td><td>%s</td></tr>";
 
-    @Rule public ApprovalsRule approver = HtmlApprovalsRule.forSourceDir("java/test");
+    @Rule public ApprovalsRule approver = HtmlApprovalsRule.forSourceDir("src/test/java");
 
     private final Solution solution = Solutions.create();
 
@@ -27,7 +27,7 @@ public class AnalyseTest {
         Iterable<Point> points = solution.readPoints(DATA_FILE);
         String htmlRows = solution.htmlRows(points, rowTemplate);
         ImmutableMap<String, String> templateVars = ImmutableMap.of(
-                "${_resourcedir}", "../../../templates",
+                "${_resourcedir}", "../../resources",
                 "${samples}", htmlRows);
         String html = Templating.substitute(Files.toString(templateFile, Charsets.UTF_8), templateVars);
         approver.assertApproved(html);
