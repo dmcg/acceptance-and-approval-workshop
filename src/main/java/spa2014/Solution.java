@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface Solution {
 
-    public Iterable<Point> parsePoints(Iterable<String> lines);
+    public Iterable<Point> parsePoints(Iterable<String> lines, int xCol, int yCol);
 
     public String htmlRows(Iterable<Point> points, String rowTemplate);
 

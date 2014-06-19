@@ -21,7 +21,7 @@ public class ReadCSVTest {
     @Test
     public void readCSVToData() throws IOException {
         List<String> lines = Files.readLines(DATA_FILE, Charsets.UTF_8);
-        Iterable<Point> points = solution.parsePoints(lines);
+        Iterable<Point> points = solution.parsePoints(lines, 0, 1);
         approver.assertApproved(points);
     }
 

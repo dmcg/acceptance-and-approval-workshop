@@ -2,6 +2,7 @@ package spa2014;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import org.apache.commons.math3.fitting.PolynomialCurveFitter;
 import org.apache.commons.math3.fitting.WeightedObservedPoint;
@@ -9,35 +10,48 @@ import org.apache.commons.math3.fitting.WeightedObservedPoint;
 import java.util.Collection;
 import java.util.List;
 
+import static com.google.common.collect.Iterables.*;
+
 @SuppressWarnings("UnusedDeclaration")
 public class DuncansSolution implements Solution {
 
-    public static final int DEGREE = 2;
+    public static final int DEGREE = 3;
 
-    public Iterable<Point> parsePoints(Iterable<String> lines) {
-        return Iterables.transform(Iterables.skip(lines, 1), lineToPoint());
+    @Override public Iterable<Point> parsePoints(Iterable<String> lines, int xCol, int yCol) {
+        Iterable<String> noHeader = skip(lines, 1);
+        Iterable<Point> baseData = transform(noHeader, lineToPoint(xCol, yCol));
+        return filter(baseData, positiveValues());
     }
 
-    private Function<? super String, Point> lineToPoint() {
-        return new Function<String, Point>() {
+    private Predicate<Point> positiveValues() {
+        return new Predicate<Point>() {
             @Override
-            public Point apply(String s) {
-                String[] parts = s.split(",");
-                return new Point(Integer.parseInt(parts[0]), Double.parseDouble(parts[1]));
+            public boolean apply(Point input) {
+                return input.y > 0;
             }
         };
     }
 
-    public String htmlRows(Iterable<Point> points, String rowTemplate) {
-        Iterable<String> tableRows = Iterables.transform(points, tableRowFromPoint(rowTemplate));
+    private Function<? super String, Point> lineToPoint(final int xCol, final int yCol) {
+        return new Function<String, Point>() {
+            @Override
+            public Point apply(String s) {
+                String[] parts = s.split(",");
+                return new Point(Double.parseDouble(parts[xCol]), Double.parseDouble(parts[yCol]));
+            }
+        };
+    }
+
+    @Override public String htmlRows(Iterable<Point> points, String rowTemplate) {
+        Iterable<String> tableRows = transform(points, tableRowFromPoint(rowTemplate));
         return Joiner.on('\n').join(tableRows);
     }
 
-    public Iterable<Point> fit(Iterable<Point> points) {
+    @Override public Iterable<Point> fit(Iterable<Point> points) {
         List<Point> pointsList = ImmutableList.copyOf(points);
         PolynomialCurveFitter fitter = PolynomialCurveFitter.create(DEGREE);
         double[] coefficients = fitter.fit(weightedPointsFor(pointsList));
-        return Iterables.transform(pointsList, sameXPolyY(pointsList, coefficients));
+        return transform(pointsList, sameXPolyY(pointsList, coefficients));
     }
 
     @Override
@@ -47,7 +61,7 @@ public class DuncansSolution implements Solution {
         double[] coefficients = fitter.fit(weightedPointsFor(pointsList));
 
         Iterable<? extends Number> xs = ContiguousSet.create(Range.closed((int)points.get(0).x, (int)xMax), DiscreteDomain.integers());
-        return Iterables.transform(xs, polyY(xs, coefficients));
+        return transform(xs, polyY(xs, coefficients));
 
     }
 
@@ -78,7 +92,7 @@ public class DuncansSolution implements Solution {
     }
 
     private Collection<WeightedObservedPoint> weightedPointsFor(Iterable<Point> points) {
-        return ImmutableList.copyOf(Iterables.transform(points, pointToWeightedObservedPoint()));
+        return ImmutableList.copyOf(transform(points, pointToWeightedObservedPoint()));
     }
 
     private Function<? super Point, WeightedObservedPoint> pointToWeightedObservedPoint() {

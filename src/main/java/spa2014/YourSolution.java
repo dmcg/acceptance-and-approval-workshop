@@ -12,7 +12,7 @@ import java.util.List;
 public class YourSolution implements Solution {
 
     @Override
-    public Iterable<Point> parsePoints(Iterable<String> lines) {
+    public Iterable<Point> parsePoints(Iterable<String> lines, int xCol, int yCol) {
         // TODO
         return ImmutableList.of();
     }

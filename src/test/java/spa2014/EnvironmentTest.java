@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 public class EnvironmentTest {
 
-    public static final File DATA_FILE = new File("datasets/air-quality-urban-background-ozone.csv");
+    public static final File DATA_FILE = new File("datasets/co2-mlo-monthly-noaa-esrl.csv");
 
     @Test
     public void runningFromRightDir() {
