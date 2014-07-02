@@ -11,8 +11,11 @@ import java.util.List;
 
 public class YourSolution implements Solution {
 
+    private static final int YEAR_COL = 0;
+    private static final int DATA_COL = (Integer) null; // TODO
+
     @Override
-    public Iterable<Point> parsePoints(Iterable<String> lines, int xCol, int yCol) {
+    public Iterable<Point> parsePoints(Iterable<String> lines) {
         // TODO
         return ImmutableList.of();
     }

@@ -15,8 +15,6 @@ import java.io.IOException;
 public class AnalyseTest {
 
     private static final File DATA_FILE = EnvironmentTest.DATA_FILE;
-    private static final int YEAR_COL = 2;
-    private static final int DATA_COL = 3;
     private static final File templateFile = new File("src/test/resources/air-quality.html");
 
     private static final String rowTemplate = "<tr><td>%s</td><td>%s</td></tr>";
@@ -28,7 +26,7 @@ public class AnalyseTest {
     @Ignore("Until you've implemented")
     @Test
     public void readCSVToHTML() throws IOException {
-        Iterable<Point> points = readPoints(DATA_FILE, YEAR_COL, DATA_COL);
+        Iterable<Point> points = readPoints(DATA_FILE);
         String htmlRows = solution.htmlRows(points, rowTemplate);
         ImmutableMap<String, String> templateVars = ImmutableMap.of(
                 "${_resourcedir}", "../../resources",
@@ -40,7 +38,7 @@ public class AnalyseTest {
     @Ignore("Until you've implemented")
     @Test
     public void fit() throws IOException {
-        ImmutableList<Point> points = ImmutableList.copyOf(readPoints(DATA_FILE, YEAR_COL, DATA_COL));
+        ImmutableList<Point> points = ImmutableList.copyOf(readPoints(DATA_FILE));
         Iterable<Point> fit = solution.fit(points);
         ImmutableMap<String, String> templateVars = ImmutableMap.of(
                 "${_resourcedir}", "../../resources",
@@ -53,7 +51,7 @@ public class AnalyseTest {
     @Ignore("Until you've implemented")
     @Test
     public void extrapolate() throws IOException {
-        ImmutableList<Point> points = ImmutableList.copyOf(readPoints(DATA_FILE, YEAR_COL, DATA_COL));
+        ImmutableList<Point> points = ImmutableList.copyOf(readPoints(DATA_FILE));
         Iterable<Point> fit = solution.extrapolate(points, 2050);
         ImmutableMap<String, String> templateVars = ImmutableMap.of(
                 "${_resourcedir}", "../../resources",
@@ -63,8 +61,8 @@ public class AnalyseTest {
         approver.assertApproved(html);
     }
 
-    private Iterable<Point> readPoints(File file, int xCol, int yCol) throws IOException {
-        return solution.parsePoints(Files.readLines(file, Charsets.UTF_8), xCol, yCol);
+    private Iterable<Point> readPoints(File file) throws IOException {
+        return solution.parsePoints(Files.readLines(file, Charsets.UTF_8));
     }
 
 

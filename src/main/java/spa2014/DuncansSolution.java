@@ -15,11 +15,14 @@ import static com.google.common.collect.Iterables.*;
 @SuppressWarnings("UnusedDeclaration")
 public class DuncansSolution implements Solution {
 
-    public static final int DEGREE = 3;
+    private static final int YEAR_COL = 0;
+    private static final int DATA_COL = 2;
 
-    @Override public Iterable<Point> parsePoints(Iterable<String> lines, int xCol, int yCol) {
+    public static final int DEGREE = 2;
+
+    @Override public Iterable<Point> parsePoints(Iterable<String> lines) {
         Iterable<String> noHeader = skip(lines, 1);
-        Iterable<Point> baseData = transform(noHeader, lineToPoint(xCol, yCol));
+        Iterable<Point> baseData = transform(noHeader, lineToPoint(YEAR_COL, DATA_COL));
         return filter(baseData, positiveValues());
     }
 

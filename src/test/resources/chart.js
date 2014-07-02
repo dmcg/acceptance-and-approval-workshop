@@ -1,6 +1,7 @@
+
 function datapoints(id) {
     return d3.selectAll("#"+id+" tr").selectAll("td").map(function(d) {
-        return {x: parseInt(d[0].textContent), y: parseFloat(d[1].textContent)};
+	return {x: parseFloat(d[0].textContent), y: parseFloat(d[1].textContent)};
     });
 }
 
@@ -8,7 +9,7 @@ var history = datapoints("history");
 var projection = datapoints("projection");
 
 var chart_data = [{key: "History", values: history}];
-if (projection) {
+if (projection.length > 0) {
     chart_data.push({key: "Projection", values: projection});
 }
 
@@ -18,7 +19,8 @@ var chart = nv.models.lineChart()
     .transitionDuration(350)
     .showLegend(true)
     .showYAxis(true)
-    .showXAxis(true);
+    .showXAxis(true)
+    .forceY(0);
 
 chart.xAxis
     .axisLabel('Year');
