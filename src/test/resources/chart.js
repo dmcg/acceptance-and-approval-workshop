@@ -19,7 +19,7 @@ var historyPoints = datapoints("history");
 var projectionPoints = datapoints("projection");
 
 var chart_data = [{key: "History", values: historyPoints}];
-if (projection.length > 0) {
+if (projectionPoints.length > 0) {
     chart_data.push({key: "Projection", values: projectionPoints});
 }
 
