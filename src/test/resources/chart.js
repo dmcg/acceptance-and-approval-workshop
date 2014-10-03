@@ -1,11 +1,4 @@
 function datapoints(id) {
-//    var result = [];
-//    var rows = document.getElementById(id).getElementsByTagName('tr')
-//    for (var i = 0; i < rows.length; i++) {
-//        var d = rows[i].getElementsByTagName("td");
-//        result.push({x: parseFloat(d[0].textContent), y: parseFloat(d[1].textContent)})
-//    }
-//    return rows;
     var result = d3.selectAll("#" + id + " tr").selectAll("td").map(
         function (d) {
             return {
